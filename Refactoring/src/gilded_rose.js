@@ -1,3 +1,5 @@
+// Referência: https://github.com/seppevs/gildedrose-js
+
 class Item {
   constructor(name, sellIn, quality) {
     this.name = name;
