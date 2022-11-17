@@ -18,6 +18,6 @@ A ideia desse repositório é guardar os códigos desenvolvidos nas atividades d
 - [Estudo sobre Quicksort usando Fork/Join](https://github.com/AlexYud/LP3A5/tree/master/QuicksortForkJoin).
 - [Estudo sobre Refatoração de Código](https://github.com/AlexYud/LP3A5/tree/master/Refactoring).
 
-# Autor
+# Obs
 
-- Alexandre Yudi Inokawa de Oliveira
+Nas atividades em que foi necessário buscar referência, a mesma se encontrará comentada no topo do arquivo principal.
