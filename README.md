@@ -12,7 +12,11 @@ A ideia desse repositório é guardar os códigos desenvolvidos nas atividades d
 
 # Temas das atividades
 
-- [Estudo sobre a classe Collectors]: https://github.com/AlexYud/LP3A5/tree/master/Collectors
+- [Estudo sobre a classe Collectors]: (https://github.com/AlexYud/LP3A5/tree/master/Collectors).
+- [Estudo sobre os Métodos Optional e Exceptions]: (https://github.com/AlexYud/LP3A5/tree/master/OptionalExceptions).
+- [Estudo sobre o desafio Produtor Consumidor]: (https://github.com/AlexYud/LP3A5/tree/master/ProdutorConsumidorExclusao).
+- [Estudo sobre Quicksort usando Fork/Join]: (https://github.com/AlexYud/LP3A5/tree/master/QuicksortForkJoin).
+- [Estudo sobre Refatoração de Código]: (https://github.com/AlexYud/LP3A5/tree/master/Refactoring).
 
 # Autor
 
