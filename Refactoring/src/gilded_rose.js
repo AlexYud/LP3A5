@@ -1,4 +1,5 @@
 // Referência: https://github.com/seppevs/gildedrose-js
+// Atividade feita em dupla: André Correia Zarzur, Alexandre Yudi I. Oliveira
 
 class Item {
   constructor(name, sellIn, quality) {
@@ -8,7 +9,7 @@ class Item {
   }
 }
 
-class BaseUpdateStrategy {
+class BaseUpdate {
   getMinimumQuality() {
     return 0;
   }
@@ -22,12 +23,14 @@ class BaseUpdateStrategy {
   }
 
   setQuality(item, value) {
-    if (value < this.getMaximumQuality() && value > this.getMinimumQuality()) {
-      item.quality = value;
-    } else if (value >= this.getMaximumQuality()) {
-      item.quality = this.getMaximumQuality();
-    } else if (value <= this.getMinimumQuality()) {
-      item.quality = this.getMinimumQuality();
+    const maximumQuality = this.getMaximumQuality();
+    const getMinimumQuality = this.getMinimumQuality();
+    if (value < maximumQuality && value > getMinimumQuality) {
+      item.quality = value
+    } else if (value >= maximumQuality) {
+      item.quality = maximumQuality
+    } else {
+      item.quality = getMinimumQuality
     }
   }
 
@@ -38,7 +41,7 @@ class BaseUpdateStrategy {
   }
 }
 
-class AgedBrieUpdateStrategy extends BaseUpdateStrategy {
+class AgedBrieUpdate extends BaseUpdate {
   appliesTo(item) {
     return item.name === 'Aged Brie';
   }
@@ -50,27 +53,20 @@ class AgedBrieUpdateStrategy extends BaseUpdateStrategy {
   }
 }
 
-class BackstagePassUpdateStrategy extends BaseUpdateStrategy {
+class BackstagePassUpdate extends BaseUpdate {
   appliesTo(item) {
     return item.name === 'Backstage passes to a TAFKAL80ETC concert';
   }
 
   updateItem(item) {
-    let qualityIncrement = 1;
-    if (item.sellIn < 1) {
-      qualityIncrement = -item.quality;
-    } else if (item.sellIn < 6) {
-      qualityIncrement = 3;
-    } else if (item.sellIn < 11) {
-      qualityIncrement = 2;
-    }
+    const qualityIncrement = item.sellIn < 1 ? qualityIncrement = -item.quality : item.sellIn < 6 ? qualityIncrement = 3 : item.sellIn < 11 ? qualityIncrement = 2 : qualityIncrement = 1;
 
     super.setQuality(item, item.quality + qualityIncrement);
     item.sellIn -= 1;
   }
 }
 
-class SulfurasUpdateStrategy extends BaseUpdateStrategy {
+class SulfurasUpdate extends BaseUpdate {
   appliesTo(item) {
     return item.name === 'Sulfuras, Hand of Ragnaros';
   }
@@ -79,18 +75,18 @@ class SulfurasUpdateStrategy extends BaseUpdateStrategy {
 class Shop {
   constructor(items = []) {
     this.items = items;
-    this.updateStrategies = [
-      new AgedBrieUpdateStrategy(),
-      new BackstagePassUpdateStrategy(),
-      new SulfurasUpdateStrategy(),
-      new BaseUpdateStrategy(),
+    this.updateTypes = [
+      new BaseUpdate(),
+      new AgedBrieUpdate(),
+      new BackstagePassUpdate(),
+      new SulfurasUpdate(),
     ]
   }
 
   updateQuality() {
     for (let item of this.items) {
-      const strategy = this.updateStrategies.find((strategy) => strategy.appliesTo(item));
-      strategy.updateItem(item);
+      const updateType = this.updateTypes.find((updateType) => updateType.appliesTo(item)); // Encontrar o tipo de update baseado no nome
+      updateType.updateItem(item);
     }
     return this.items;
   }
